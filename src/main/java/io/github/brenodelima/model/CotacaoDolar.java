@@ -1,14 +1,19 @@
 package io.github.brenodelima.model;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
-public class CotacaoDolar extends PanacheEntityBase {
+@Setter
+@AllArgsConstructor
+@Builder
+public class CotacaoDolar {
     private Double valorDolar;
-    private LocalDateTime cotacaoDolar;
+    private LocalDate cotacaoDolar;
     private Double valorDolarAnterior;
-    private LocalDateTime cotacaoDolarAnterior;
+    private LocalDate cotacaoDolarAnterior;
 }
