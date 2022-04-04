@@ -14,6 +14,6 @@ public class ExceptionMappers {
     }
     @ServerExceptionMapper
     public RestResponse<String> mapException(ServicoIndisponivelException erro) {
-        return RestResponse.status(Response.Status.BAD_REQUEST, erro.msg);
+        return RestResponse.status(Response.Status.fromStatusCode(500), erro.msg);
     }
 }

@@ -1,6 +1,7 @@
 package io.github.brenodelima.service;
 
 import io.github.brenodelima.exception.RequisicaoInvalidaException;
+import io.github.brenodelima.exception.ServicoIndisponivelException;
 import io.github.brenodelima.model.CotacaoDolar;
 import io.github.brenodelima.restconsultacotacaobcbapi.ConsultaCotacaoBCBResource;
 import io.github.brenodelima.util.DataUtil;
@@ -16,12 +17,12 @@ public class CotacaoDolarService {
     @Inject
     ConsultaCotacaoBCBResource resource;
     public CotacaoDolar consultarCotacaoDolar(String dataRecebida) {
+        String data = validaFinalDeSemana(DataUtil.stringParaLocalDate(dataRecebida));
         try {
-        List<CotacaoDolar> cotacoes = resource.consultarCotacaoDolarBCB(
-                validaFinalDeSemana(DataUtil.stringParaLocalDate(dataRecebida)));
+        List<CotacaoDolar> cotacoes = resource.consultarCotacaoDolarBCB(data);
         } catch (RuntimeException e) {
             e.printStackTrace();
-            throw new RequisicaoInvalidaException("A API que consulta a cotação do dólar no BCB está" +
+            throw new ServicoIndisponivelException("A API que consulta a cotação do dólar no BCB está" +
                     " fora do ar, tente novamente mais tarde.");
         }
         return null;
